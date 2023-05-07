@@ -1,11 +1,16 @@
+import uvicorn
 from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
+
 from Router.main import router
+from DataBase import SessionLocal
+
 from starlette.requests import Request
 from starlette.responses import Response
-from DataBase import SessionLocal
 
 
 app = FastAPI()
+app.mount('/static', StaticFiles(directory='static', html=True), name='static')
 app.include_router(router)
 
 
@@ -18,3 +23,7 @@ async def db_session_middleware(request: Request, call_next):
     finally:
         request.state.db.close()
     return response
+
+
+if __name__ == '__main__':
+    uvicorn.run(app, port=5000)
