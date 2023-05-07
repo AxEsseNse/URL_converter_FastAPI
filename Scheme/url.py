@@ -1,15 +1,26 @@
 from pydantic import BaseModel
 
 
-# Схемы для валидации
-
-class Url(BaseModel):
+class SchemeURL(BaseModel):
     url: str
+
+class SchemeFeedback(BaseModel):
+    msg: str
+
+
+
+
+
+
+
+
+
+
 
 
 class SchemeShortURL(BaseModel):
     short_url: str
-    # Я хз как реализовать валидацию short url. Потому что тут схема для json, а мне просто приходит переменная
+    # Я хз как реализовать валидацию short TableModelURL. Потому что тут схема для json, а мне просто приходит переменная
     # типо vk.com/<peremennaya>
 
 class URLBase(BaseModel):

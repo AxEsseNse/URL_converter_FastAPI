@@ -75,7 +75,7 @@ function feedback() {
         msg: feedback
     })
 
-    fetch('http://127.0.0.1:5000/api/feedback', {
+    fetch('http://127.0.0.1:5000/api/feedback/', {
         method: 'POST',
         headers: {
         'Content-Type': 'application/json'
