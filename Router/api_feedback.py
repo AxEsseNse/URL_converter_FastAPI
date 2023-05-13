@@ -8,7 +8,7 @@ router_feedback = APIRouter()
 
 
 @router_feedback.post('/')
-def func(request: SchemeFeedback, db: Session = Depends(Service.get_db)):
+async def func(request: SchemeFeedback, db: Session = Depends(Service.get_db)):
     user_msg = request.dict()['msg']
     response = Service.register_feedback(user_msg, db)
     return response
