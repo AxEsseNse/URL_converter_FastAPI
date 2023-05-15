@@ -4,7 +4,7 @@ from datetime import datetime
 
 
 class ModelURL(ModelORM):
-    __tablename__ = 'FA_url'
+    __tablename__ = 'url'
     id = Column(Integer, primary_key=True, unique=True)
     short_url = Column(String, unique=True)
     url = Column(String, unique=True)
@@ -14,7 +14,7 @@ class ModelURL(ModelORM):
 
 
 class ModelFeedback(ModelORM):
-    __tablename__ = 'FA_feedback'
+    __tablename__ = 'feedback'
     id = Column(Integer, primary_key=True, unique=True)
     msg = Column(String, unique=True)
     date = Column(Float, default=datetime.timestamp(datetime.utcnow()))

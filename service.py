@@ -57,10 +57,6 @@ class Service:
             date = f"Дата обращения: {datetime.fromtimestamp(database_data.date).strftime('%d.%m.%Y')}"
             return {'data': 'Обращение с идентичным содержимым уже зарегистрировано.', 'date': date, 'code': False}
 
-
-
-
-
     @staticmethod
     def check_short_url(user_short_url, db):
         return db.query(ModelURL).filter_by(short_url=user_short_url).first()
