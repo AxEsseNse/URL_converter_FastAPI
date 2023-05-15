@@ -8,7 +8,6 @@ from validators import url as url_validator
 router_url = APIRouter()
 
 
-# Жек, вот тут я так понял проферы не через валидацию (библиотеку) делают, а через саму схему, а в ней регулярку, да?
 @router_url.post('/')
 async def func(request: SchemeURL, db: Session = Depends(Service.get_db)):
     user_url = request.dict()['url']

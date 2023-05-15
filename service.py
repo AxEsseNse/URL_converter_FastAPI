@@ -1,7 +1,5 @@
 from starlette.requests import Request
 from starlette.templating import Jinja2Templates
-from DataBase import engine
-from DBModel.table import TableModelFeedback
 from DBModel.model import ModelURL, ModelFeedback
 from shorter import create_short_url
 from datetime import datetime
@@ -31,24 +29,24 @@ class Service:
             db.commit()
             return {'data': f'{BASE_URL}{short_url}', 'comment': 'Your URL added to DataBase. Short URL returned.'}
         else:
+            cls.update_url_data(database_data, db)
             return {'data': f'{BASE_URL}{database_data.short_url}',
                     'comment': 'There is this URL in DataBase already. Returned corresponding short URL from DataBase.'}
 
-
-
+    @staticmethod
+    def update_url_data(data, db):
+        data.count_use += 1
+        data.date_last_use = datetime.timestamp(datetime.utcnow())
+        db.commit()
+        return data.count_use
 
     @staticmethod
-    def check_feedback(user_msg):
-        conn = engine.connect()
-        query_select = TableModelFeedback.select().where(TableModelFeedback.columns.msg == user_msg)
+    def check_feedback(user_msg, db):
+        return db.query(ModelFeedback).filter_by(msg=user_msg).first()
 
-        database_request = conn.execute(query_select)
-        database_response = database_request.fetchone()
-        return database_response
-
-    @staticmethod
-    def register_feedback(user_msg, db):
-        database_data = Service.check_feedback(user_msg)
+    @classmethod
+    def register_feedback(cls, user_msg, db):
+        database_data = cls.check_feedback(user_msg, db)
         if database_data is None:
             new_data = ModelFeedback(msg=user_msg)
             db.add(new_data)
