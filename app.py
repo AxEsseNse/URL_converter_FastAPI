@@ -16,7 +16,7 @@ app.include_router(router)
 
 @app.middleware('http')
 async def db_session_middleware(request: Request, call_next):
-    response = Response('Server is not available', status_code=500)
+    response = Response('Internal Server Error', status_code=500)
     try:
         request.state.db = SessionLocal()
         response = await call_next(request)

@@ -1,7 +1,8 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, AnyHttpUrl
 
 
 class SchemeURL(BaseModel):
+    #url: AnyHttpUrl
     url: str
 
 class SchemeFeedback(BaseModel):

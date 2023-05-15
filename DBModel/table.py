@@ -5,6 +5,8 @@ from datetime import datetime
 metadata = MetaData()
 
 
+# Таблицы удалить ( переписать в миграцию алембика)
+
 TableModelURL = Table('FA_url', metadata,
                       Column('id', Integer(), primary_key=True),
                       Column('short_url', String(5), unique=True),

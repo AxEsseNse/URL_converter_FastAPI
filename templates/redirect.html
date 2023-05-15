@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
     <link type="text/css" href="{{ url_for('static', path='CSS/main.css') }}" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', path='JS/redirect.js') }}"></script>
     <link rel="icon" href="{{ url_for('static', path='IMG/favicon.png') }}" sizes="32x32" type="image/png">
 </head>
 <body class="text-center"></body>
@@ -30,13 +31,5 @@
     <div class="text-center axefooter">
         <p class="mt-5 mb-3 text-muted">AxEsseNse &copy; 2023</p>
     </div>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const response_log = document.getElementById('responselog').textContent
-            console.log(response_log)
-            const temp = document.getElementById('redirect').textContent;
-            document.location.href = temp
-        })
-    </script>
 </body>
 </html>
