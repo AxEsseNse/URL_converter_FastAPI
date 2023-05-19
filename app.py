@@ -8,6 +8,8 @@ from DataBase import SessionLocal
 from starlette.requests import Request
 from starlette.responses import Response
 
+from fastapi.responses import PlainTextResponse, JSONResponse
+from fastapi.exceptions import RequestValidationError, HTTPException
 
 app = FastAPI()
 app.mount('/static', StaticFiles(directory='static', html=True), name='static')
@@ -23,6 +25,21 @@ async def db_session_middleware(request: Request, call_next):
     finally:
         request.state.db.close()
     return response
+
+
+@app.exception_handler(RequestValidationError)
+async def wrong_url_format(request: Request, exc: RequestValidationError):
+    body = exc.body
+    if 'url' in body:
+        return JSONResponse(
+            status_code=400,
+            content={'data': 'incorrect url', 'comment': 'URL incorrect'}
+        )
+    elif 'msg' in body:
+        return JSONResponse(
+            status_code=400,
+            content={'data': 'Отправлены некорректные данные', 'date': 'Ошибка', 'code': False}
+        )
 
 
 if __name__ == '__main__':
