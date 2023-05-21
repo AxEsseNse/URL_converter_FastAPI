@@ -3,6 +3,7 @@ from service import Service
 from DataBase import SessionLocal
 from uuid import uuid4
 
+
 class CheckFeedback(TestCase):
     def test_msg_in_DB(self):
         self.assertEqual(Service.check_feedback(user_msg="test", db=SessionLocal()).msg,

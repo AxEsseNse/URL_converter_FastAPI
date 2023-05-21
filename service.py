@@ -12,7 +12,6 @@ BASE_URL = 'http://127.0.0.1:5000/'
 templates = Jinja2Templates(directory='templates')
 
 
-# Жек, вопрос. А тут нужна асинхронщина в классе? у меня при вызове функций класса в хендлерах стоят await. А вот тут нужно или нет хз
 class Service:
     @staticmethod
     def get_db(request: Request) -> sessionmaker:
